@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, ::backdrop {
+            background: #fff;
+        }
+        #fullscreen-button {
+            position: absolute;
+            top:  15px;
+            right:  15px;
+            background: rgb(10, 182, 212);
+            border:  0;
+            width:  40px;
+            height:  40px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            transition:  transform .3s;
+            cursor:  pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #fullscreen-button:hover {
+            transform: scale(1.125);
+        }
+        #fullscreen-button svg:nth-child(2) { 
+            display: none;
+        }
+        [fullscreen] #fullscreen-button svg:nth-child(1) {
+            display: none;
+        }
+        [fullscreen] #fullscreen-button svg:nth-child(2) {
+            display: inline-block;
+        }
+        #loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #b1f0f0;
+            border-top: 8px solid #0b5757;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #modal-wrapper {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loading-spinner"></div>
+
+<div id="modal-wrapper" class="modal">
+    <div class="center">
+        <div class="rotation">
+            <img src="images/360/100.jpg">
+            <img src="images/360/101.jpg">
+            <img src="images/360/102.jpg">
+            <img src="images/360/103.jpg">
+            <img src="images/360/104.jpg">
+            <img src="images/360/105.jpg">
+            <img src="images/360/106.jpg">
+            <img src="images/360/107.jpg">
+            <img src="images/360/108.jpg">
+            <img src="images/360/109.jpg">
+            <img src="images/360/110.jpg">
+            <img src="images/360/111.jpg">
+            <img src="images/360/112.jpg">
+            <img src="images/360/113.jpg">
+            <img src="images/360/114.jpg">
+            <img src="images/360/115.jpg">
+            <img src="images/360/116.jpg">
+            <img src="images/360/117.jpg">
+            <img src="images/360/118.jpg">
+            <img src="images/360/119.jpg">
+            <img src="images/360/120.jpg">
+            <img src="images/360/121.jpg">
+            <img src="images/360/122.jpg">
+            <img src="images/360/123.jpg">
+            <img src="images/360/124.jpg">
+            <img src="images/360/125.jpg">
+            <img src="images/360/126.jpg">
+            <img src="images/360/127.jpg">
+            <img src="images/360/128.jpg">
+            <img src="images/360/129.jpg">
+            <img src="images/360/130.jpg">
+            <img src="images/360/131.jpg">
+            <img src="images/360/132.jpg">
+            <img src="images/360/133.jpg">
+            <img src="images/360/134.jpg">
+            <img src="images/360/135.jpg">
+            <img src="images/360/136.jpg">
+            <img src="images/360/137.jpg">
+            <img src="images/360/138.jpg">
+            <img src="images/360/139.jpg">
+            <img src="images/360/140.jpg">
+            <img src="images/360/141.jpg">
+            <img src="images/360/142.jpg">
+            <img src="images/360/143.jpg">
+            <img src="images/360/144.jpg">
+            <img src="images/360/145.jpg">  
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll(".rotation img");
+        let loadedImages = 0;
+        const totalImages = images.length;
+        const loadingSpinner = document.getElementById("loading-spinner");
+        const modalWrapper = document.getElementById("modal-wrapper");
+
+        images.forEach(img => {
+            img.onload = checkAllImagesLoaded;
+            img.onerror = checkAllImagesLoaded;
+        });
+
+        // Timeout para garantir que o loading desapareça mesmo com falhas no carregamento
+        const maxLoadTime = 10000; // 10 segundos
+        setTimeout(() => {
+            loadingSpinner.style.display = "none";
+            modalWrapper.style.display = "block";
+        }, maxLoadTime);
+
+        function checkAllImagesLoaded() {
+            loadedImages++;
+            if (loadedImages === totalImages) {
+                loadingSpinner.style.display = "none";
+                modalWrapper.style.display = "block";
+            }
+        }
+    });
+</script>
+
+<script src="js/360deg.js"></script>
+</body>
+</html>
